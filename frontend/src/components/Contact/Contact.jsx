@@ -2,6 +2,8 @@ import React, { useState, useEffect } from "react";
 import "./Contact.css";
 import Header from "../Header/Header";
 import Button from "../Button/Button";
+import Footer from "../Footer/Footer";
+
 
 const Contact = () => {
   const [formData, setFormData] = useState({
@@ -99,6 +101,7 @@ const Contact = () => {
         </div>
         <div id="map" className="contact-map"></div>
       </div>
+      <Footer />
     </div>
   );
 };

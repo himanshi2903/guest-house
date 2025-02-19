@@ -1,6 +1,7 @@
 import React from "react";
 import "./Policy.css";
 import Header from "../Header/Header";
+import Footer from "../Footer/Footer";
 
 const policies = [
   {
@@ -50,6 +51,7 @@ const PolicyPage = () => {
           ))}
         </div>
       </div>
+      <Footer />
     </div>
   );
 };

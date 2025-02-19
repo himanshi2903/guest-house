@@ -7,30 +7,30 @@ import "./Home.css";
 
 const Home = () => {
   const images = [
-    { src: "gs-photo.jpeg", text: "PROP 1" },
-    { src: "gs-photo.jpeg", text: "PROP 2" },
-    { src: "gs-photo.jpeg", text: "PROP 3" },
-    { src: "gs-photo.jpeg", text: "PROP 4" },
-    { src: "gs-photo.jpeg", text: "PROP 5" },
+    { src: "https://plus.unsplash.com/premium_photo-1661963657190-ecdd1ca794f9?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NXx8c3BhY2lvdXMlMjByb29tc3xlbnwwfHwwfHx8MA%3D%3D", text: "PROP 1" },
+    { src: "https://images.unsplash.com/photo-1602081112620-4da569dda684?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8ZGluaW5nJTIwaGFsbHxlbnwwfHwwfHx8MA%3D%3D", text: "PROP 2" },
+    { src: "https://plus.unsplash.com/premium_photo-1687558345854-a07ac0be8cd6?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8d2lmaXxlbnwwfHwwfHx8MA%3D%3D", text: "PROP 3" },
+    { src: "https://plus.unsplash.com/premium_photo-1661879435429-a396d927c686?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8Y29uZmVyZW5jZSUyMHJvb218ZW58MHx8MHx8fDA%3D", text: "PROP 4" },
+    { src: "https://plus.unsplash.com/premium_photo-1679920025550-75324e59680f?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8aG91c2VrZWVwaW5nfGVufDB8fDB8fHww", text: "PROP 5" },
   ];
 
   const img = [
-    { src: "dine.jpeg", title: "Dining Area" },
-    { src: "dine.jpeg", title: "Dining Area" },
-    { src: "dine.jpeg", title: "Dining Area" },
-    { src: "dine.jpeg", title: "Dining Area" },
-    { src: "dine.jpeg", title: "Dining Area" },
-    { src: "dine.jpeg", title: "Dining Area" },
+    { src: "https://plus.unsplash.com/premium_photo-1661963657190-ecdd1ca794f9?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NXx8c3BhY2lvdXMlMjByb29tc3xlbnwwfHwwfHx8MA%3D%3D", title: "Spacious Rooms" },
+    { src:"https://images.unsplash.com/photo-1602081112620-4da569dda684?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8ZGluaW5nJTIwaGFsbHxlbnwwfHwwfHx8MA%3D%3D", title: "Dining Hall" },
+    { src: "https://plus.unsplash.com/premium_photo-1687558345854-a07ac0be8cd6?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8d2lmaXxlbnwwfHwwfHx8MA%3D%3D", title: "Wi-Fi Connectivity" },
+    { src: "https://plus.unsplash.com/premium_photo-1661879435429-a396d927c686?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8Y29uZmVyZW5jZSUyMHJvb218ZW58MHx8MHx8fDA%3D", title: "Conference Room" },
+    { src: "https://images.unsplash.com/photo-1617897711385-df9c86b7dfe3?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NHx8Y2N0dnxlbnwwfHwwfHx8MA%3D%3D", title: "24/7 Security" },
+    { src: "https://plus.unsplash.com/premium_photo-1679920025550-75324e59680f?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8aG91c2VrZWVwaW5nfGVufDB8fDB8fHww", title: "Housekeeping" },
   ];
   return (
     <div className="home">
       <Header />
       <div className="image-container">
-        <img src="gs-photo.jpeg" alt="gsits" />
+        <img src="gs-photo.jpg" alt="gsits" />
         <div className="overlay-content">
           <h3>
             Welcome to, <br />
-            <span>Guest House Name</span>
+            <span>SGSITS Guest House</span>
           </h3>
           <Button text="View Rooms" />
         </div>
@@ -103,7 +103,6 @@ const Home = () => {
               <img src={img.src} alt={img.title} />
               <div className="overlay">
                 <h4>{img.title}</h4>
-                <button>View More</button>
               </div>
             </div>
           ))}

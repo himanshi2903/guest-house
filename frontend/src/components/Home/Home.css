@@ -107,10 +107,9 @@
   
   .facility-images {
     padding: 3rem;
-
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
-    gap: 20px;
+    gap: 80px;
     margin-top: 20px;
   }
   
@@ -118,17 +117,22 @@
     position: relative;
     overflow: hidden;
     border-radius: 10px;
+    z-index: 1;
+    width: 100%; /* Ensures all cards take equal width */
+    height: 250px; /* Set a fixed height for uniform images */
   }
-  
+
   .facility-card img {
-    width: 100%;
-    height: auto;
-    display: block;
-    transition: transform 0.3s ease-in-out;
-  }
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* Ensures the image covers the area without distortion */
+  display: block;
+  transition: filter 0.3s ease-in-out;
+}
   
   .facility-card:hover img {
     transform: scale(1.1);
+    filter: brightness(0.7);
   }
   
   .overlay {
@@ -155,21 +159,10 @@
   .overlay h4 {
     margin-bottom: 10px;
     font-size: 1.2em;
-  }
-  
-  .overlay button {
-    padding: 8px 12px;
-    border: none;
-    background: #f5a623;
     color: white;
-    cursor: pointer;
-    border-radius: 5px;
   }
   
-  .overlay button:hover {
-    background: #d48820;
-  }
-
+  
   .team-section {
     text-align: center;
     padding: 40px 20px;
