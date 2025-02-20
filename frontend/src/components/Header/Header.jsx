@@ -43,7 +43,7 @@ const Header = () => {
               <div className="dropdown-menu">
                 <ul>
                 <li><Button text="VIEW ROOMS" onClick={() => navigate("/allrooms")} className="dropdown-button" /></li>
-                  <li onClick={() => navigate("/home")}>Home</li>
+                  <li onClick={() => navigate("/")}>Home</li>
                   <li onClick={() => navigate("/facilities")}>Facilities</li>
                   <li onClick={() => navigate("/policy")}>View Policy</li>
                   <li onClick={() => navigate("/contact")}>Contact</li>

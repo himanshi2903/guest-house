@@ -23,6 +23,12 @@ box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 width: 300px;
 }
 
+.reg-box h3 {
+  color: white;
+  text-transform: uppercase;
+  border-bottom: 2px solid white;
+}
+
 .input-group {
 margin: 10px 0;
 }

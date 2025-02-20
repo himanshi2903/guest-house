@@ -10,6 +10,9 @@ import Facilities from "./components/Facilities/Facilities";
 import Policy from "./components/Policy/Policy";
 import Contact from "./components/Contact/Contact";
 
+import AdminLogin from "./admin/AdminLogin";
+import AdminFooter from "./admin/AdminFooter";
+
 const App = () => {
   return (
     <Router>
@@ -22,6 +25,9 @@ const App = () => {
           <Route path="/facilities" element={<Facilities />} />
           <Route path="/policy" element={<Policy />} />
           <Route path="/contact" element={<Contact />} />
+
+          <Route path="/admin" element={<AdminLogin />} />
+          <Route path="/admin-footer" element={<AdminFooter />} />
         </Routes>
       </div>
     </Router>
