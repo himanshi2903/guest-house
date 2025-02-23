@@ -20,7 +20,7 @@ const Footer = () => {
             <li><a href="/allrooms">Rooms</a></li>
             <li><a href="/facilities">Facilities</a></li>
             <li><a href="/contact">Contact</a></li>
-            <li><a href="/facilities">Facilities</a></li>
+            {/* <li><a href="/facilities">Facilities</a></li> */}
           </ul>
         </div>
 

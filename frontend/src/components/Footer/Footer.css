@@ -8,8 +8,12 @@
   
   .footer-content {
     display: flex;
-    justify-content: space-around;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: flex-start;
     flex-wrap: wrap;
+    max-width: 1200px;
+    margin: 0 auto;
     padding: 20px;
   }
   

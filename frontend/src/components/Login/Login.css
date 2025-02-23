@@ -90,3 +90,33 @@
     color: #fff;
     text-decoration: underline;
   }
+
+  .error {
+    color: rgb(155, 0, 0);
+    font-size: 0.9em;
+    margin-top: 5px;
+  }
+  
+  .strength {
+    font-size: 0.9em;
+    font-weight: bold;
+    display: block;
+    margin-top: 5px;
+  }
+  
+  .Weak {
+    color: rgb(247, 144, 144);
+  }
+  
+  .Medium {
+    color: rgb(255, 221, 159);
+  }
+  
+  .Strong {
+    color: rgb(137, 245, 137);
+  }
+  
+  .captcha-text {
+    background-color: white;
+    padding: .5rem;
+  }

@@ -12,6 +12,7 @@ import Contact from "./components/Contact/Contact";
 
 import AdminLogin from "./admin/AdminLogin";
 import AdminFooter from "./admin/AdminFooter";
+import AdminDashboard from "./admin/AdminDashboard";
 
 const App = () => {
   return (
@@ -28,6 +29,7 @@ const App = () => {
 
           <Route path="/admin" element={<AdminLogin />} />
           <Route path="/admin-footer" element={<AdminFooter />} />
+          <Route path="/admin-dashboard" element={<AdminDashboard />} />
         </Routes>
       </div>
     </Router>
