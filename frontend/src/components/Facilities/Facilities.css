@@ -13,9 +13,13 @@
 
 .facilities-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  grid-template-columns: repeat(3, minmax(350px, 1fr));
   gap: 80px;
   justify-content: center;
+  width: 90%;
+  max-width: 1200px; 
+  margin: auto;
+  margin-bottom: 50px;
 }
 
 .facility-card {
@@ -26,6 +30,12 @@
   transition: transform 0.3s ease, box-shadow 0.3s ease;
   color: white; /* Ensures text remains bright */
   overflow: hidden; /* Ensures pseudo-element does not spill outside */
+
+  display: flex; 
+  flex-direction: column;
+  align-items: center; /* Centers vertically */
+  justify-content: center; /* Centers horizontally */
+  text-align: center;
 }
 
 /* Background Overlay for Dimming the Image */
@@ -89,11 +99,19 @@
 
 /* Facility Details Section */
 .facilities-details {
-  margin-top: 50px;
+  margin-top: 100px;
   padding: 20px;
   background: white;
   border-radius: 10px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+  align-items: center;  /* Centers children horizontally */
+  justify-content: center; 
+  text-align: center;
+  width: 100%;  /* Adjust width to ensure centering */
+  max-width: 1200px; /* Prevents excessive stretching */
+  margin: auto; /* Centers the entire container */
 }
 
 .facility-detail {
@@ -102,8 +120,15 @@
 }
 
 .facility-detail h2 {
-  font-size: 1.8rem;
+  font-size: 2rem;
   margin-bottom: 10px;
+}
+
+.facility-detail p {
+  font-size: 1.2rem;
+  margin-bottom: 10px;
+  max-width: 600px;
+  text-align: center;
 }
 
 .pricing-table {
@@ -116,10 +141,82 @@
 .pricing-table td {
   border: 1px solid #ddd;
   padding: 10px;
-  text-align: left;
+  text-align: center;
 }
 
 .pricing-table th {
   background-color: #0c2d6b;
   color: white;
+}
+
+@media (max-width: 1024px) {
+  .facilities-grid {
+    grid-template-columns: repeat(2, minmax(300px, 1fr)); /* Two columns instead of three */
+    gap: 50px;
+  }
+
+  .facility-detail p {
+    font-size: 1rem; /* Slightly reduce text size */
+    max-width: 500px;
+  }
+
+  .facility-card {
+    padding: 15px;
+  }
+}
+
+/* Mobile (max-width: 768px) */
+@media (max-width: 768px) {
+  .facilities-grid {
+    grid-template-columns: repeat(1, 1fr); /* Single column */
+    gap: 40px;
+  }
+
+  .title {
+    font-size: 1.8rem;
+  }
+
+  .facility-detail h2 {
+    font-size: 1.5rem;
+  }
+
+  .facility-detail p {
+    font-size: 1rem;
+    max-width: 400px;
+  }
+
+  .pricing-table th,
+  .pricing-table td {
+    padding: 8px;
+  }
+}
+
+/* Small Mobile (max-width: 480px) */
+@media (max-width: 480px) {
+  .facilities-container {
+    padding: 20px;
+  }
+
+  .title {
+    font-size: 1.6rem;
+  }
+
+  .facilities-grid {
+    grid-template-columns: 1fr; /* Single column */
+    gap: 30px;
+  }
+
+  .facility-detail h2 {
+    font-size: 1.4rem;
+  }
+
+  .facility-detail p {
+    font-size: 0.9rem;
+    max-width: 90%;
+  }
+
+  .pricing-table th,
+  .pricing-table td {
+    padding: 6px;
+  }
 }

@@ -4,39 +4,77 @@ import "./Facilities.css";
 import Button from "../Button/Button";
 import Header from "../Header/Header";
 import Footer from "../Footer/Footer";
+import Slideshow from "../Slideshow/Slideshow";
 
 const facilities = [
   {
     name: "Spacious Rooms",
-    description: "Comfortable and well-furnished rooms for a relaxing stay.",
-    image: "https://plus.unsplash.com/premium_photo-1661963657190-ecdd1ca794f9?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NXx8c3BhY2lvdXMlMjByb29tc3xlbnwwfHwwfHx8MA%3D%3D", // Update with actual image paths
+    description:
+      "Well-furnished, spacious rooms designed for a comfortable stay. Guests can choose between air-conditioned (AC) and non-air-conditioned (Non-AC) rooms, each equipped with cozy double beds and attached washrooms for convenience. Additionally, we provide spacious halls for group stays or events. However, please note that hall accommodations may be shared with other guests opting for the same facility. Whether you prefer a private room or a shared space, we ensure a clean, peaceful, and relaxing environment for all our visitors..",
+    image: "AC-Room.png",
+    pricing: [
+      { service: "AC Rooms", price: "Rs. 1500/night" },
+      { service: "Non-AC Rooms", price: "Rs. 1500/night" },
+      { service: "Hall", price: "Rs. 300/bed" },
+    ],
+    slideshowImages: [
+      { src: "AC-Room.png" },
+      { src: "Non-AC-Room.png" },
+      { src: "hall.png" },
+    ],
   },
   {
     name: "Dining Hall",
-    description: "A well-maintained dining area serving nutritious meals.",
-    image: "https://images.unsplash.com/photo-1602081112620-4da569dda684?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8ZGluaW5nJTIwaGFsbHxlbnwwfHwwfHx8MA%3D%3D",
+    description:
+      "Warm and nutritious meals are served daily at minimal rates from the hostel mess. Our dining hall provides a clean and comfortable space for guests to enjoy wholesome food, ensuring a healthy and satisfying experience during their stay.",
+    image: "dining1.png",
+    pricing: [{ service: "Lunch/Dinner", price: "Rs. 50/plate" }],
+    slideshowImages: [
+      { src: "dining.png" },
+      { src: "dining1.png" },
+    ],
   },
   {
     name: "Wi-Fi Connectivity",
-    description: "High-speed internet access throughout the guest house.",
-    image: "https://plus.unsplash.com/premium_photo-1687558345854-a07ac0be8cd6?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8d2lmaXxlbnwwfHwwfHx8MA%3D%3D",
-  },
-  {
-    name: "Conference Room",
     description:
-      "A fully equipped conference room for meetings and discussions.",
-    image: "https://plus.unsplash.com/premium_photo-1661879435429-a396d927c686?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8Y29uZmVyZW5jZSUyMHJvb218ZW58MHx8MHx8fDA%3D",
+      "Enjoy seamless high-speed internet access throughout the guest house. Whether for work, studies, or leisure, our reliable Wi-Fi ensures uninterrupted connectivity, allowing guests to stay connected at all times.",
+    image: "corridor.png",
+    slideshowImages: [
+      { src: "corridor.png" },
+    ],
   },
   {
-    name: "24/7 Security",
-    description: "Round-the-clock security to ensure guest safety.",
-    image: "https://images.unsplash.com/photo-1617897711385-df9c86b7dfe3?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NHx8Y2N0dnxlbnwwfHwwfHx8MA%3D%3D",
+    name: "Living Room",
+    description:
+      "A spacious and well-furnished living room equipped with plush sofas and a large TV, creating a warm and inviting space for relaxation. Whether you want to unwind after a long day, catch up on your favorite shows, or socialize with fellow guests, this common area offers a comfortable and homely environment for all.",
+    image: "living2.png",
+    slideshowImages: [
+      { src: "living.png" },
+      { src: "living2.png" },
+    ],
+  },
+  {
+    name: "Fitness & Outdoor Space",
+    description:
+      "Our guest house provides a peaceful outdoor space perfect for morning walks, light exercises, and relaxation. While a treadmill is available for basic fitness needs, the beautifully maintained outdoor area allows guests to enjoy fresh air and scenic surroundings, making it an ideal spot for unwinding and staying active.",
+    image: "gym.png",
+    slideshowImages: [
+      { src: "gym.png" },
+      { src: "out3.png" },
+      { src: "out.png" },
+      { src: "out2.png" },
+    ],
   },
   {
     name: "Housekeeping",
     description:
-      "Daily housekeeping services to maintain hygiene and cleanliness.",
-    image: "https://plus.unsplash.com/premium_photo-1679920025550-75324e59680f?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8aG91c2VrZWVwaW5nfGVufDB8fDB8fHww",
+      "Our dedicated housekeeping team ensures a clean and well-maintained environment throughout the guest house. Rooms and common areas are cleaned regularly, with fresh linens provided to maintain hygiene standards. Guests can enjoy a comfortable and tidy stay, with prompt assistance available for any housekeeping requests.",
+    image: "hall1.png",
+    slideshowImages: [
+      { src: "hall-w.png" },
+      { src: "hall3.png" },
+      { src: "hall2.png" },
+    ],
   },
 ];
 
@@ -82,7 +120,7 @@ const Facilities = () => {
               }}
             >
               <h2 className="facility-title">{facility.name}</h2>
-              <p className="facility-description">{facility.description}</p>
+
               <Button
                 text="KNOW MORE"
                 onClick={() => handleNavigation(facility.name)}
@@ -101,25 +139,36 @@ const Facilities = () => {
             >
               <h2>{facility.name}</h2>
               <p>{facility.description}</p>
-              <table className="pricing-table">
-                <thead>
-                  <tr>
-                    <th>Service</th>
-                    <th>Price</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td>Standard</td>
-                    <td>$50</td>
-                  </tr>
-                  <tr>
-                    <td>Deluxe</td>
-                    <td>$80</td>
-                  </tr>
-                </tbody>
-              </table>
+              
+
+              {/* Render pricing table only if pricing exists */}
+              {facility.pricing && (
+                <table className="pricing-table">
+                  <thead>
+                    <tr>
+                      <th>Service</th>
+                      <th>Price</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {facility.pricing.map((item, idx) => (
+                      <tr key={idx}>
+                        <td>{item.service}</td>
+                        <td>{item.price}</td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              )}
+              <br/>
+              <h3>GLIMPSES:</h3>
+              {facility.slideshowImages && (
+                <Slideshow images={facility.slideshowImages} />
+              )}
+              <br/>
+              <hr/>
             </div>
+            
           ))}
         </div>
       </div>

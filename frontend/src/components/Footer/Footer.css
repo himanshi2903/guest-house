@@ -8,20 +8,25 @@
   
   .footer-content {
     display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: flex-start;
-    flex-wrap: wrap;
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 20px;
+  justify-content: space-evenly;
+  max-width: 2000px;
+  margin: auto;
+  padding: 0 20px;
   }
   
   .footer-section {
-    flex: 1;
+    display: flex;
     margin: 10px;
-    min-width: 250px;
+    min-width: 300px;
+    text-align: justify;
+    gap: 10rem;
   }
+
+  .footer-section .about,
+  .footer-section .links,
+  .footer-section .contact {
+      max-width: 400px;
+  }  
   
   .footer-section h3 {
     font-size: 1.2rem;
@@ -63,3 +68,12 @@
     font-weight: bold;
   }
   
+  @media (max-width: 1024px) {
+    .footer-section {
+      display: flex;
+      margin: 10px;
+      min-width: 300px;
+      text-align: center;
+      gap: 6rem;
+    }
+  }

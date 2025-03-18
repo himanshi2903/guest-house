@@ -51,7 +51,7 @@ const Header = () => {
               </div>
             )}
           </div>
-          <span className="guest-house">GUEST HOUSE NAME</span>
+          <span className="guest-house">NARMADA GUEST HOUSE</span>
         </div>
 
         <div className="center">
