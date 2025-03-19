@@ -7,9 +7,45 @@ import Button from "../Button/Button";
 const Header = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [isUserMenuOpen, setIsUserMenuOpen] = useState(false);
+
+  const [searchQuery, setSearchQuery] = useState("");
+  const [searchResults, setSearchResult] = useState([]);
+
   const dropdownRef = useRef(null);
   const userMenuRef = useRef(null);
   const navigate = useNavigate();
+
+  const keywordToPageMap = [
+    { keywords: ["home"], name: "Home", path: "/" },
+    { keywords: ["room", "rooms", "guest", "stay"], name: "All Rooms", path: "/allrooms" },
+    { keywords: ["dining", "food", "meal", "restaurant"], name: "Facilities - Dining", path: "/facilities" },
+    { keywords: ["gym", "fitness", "workout"], name: "Facilities - Gym", path: "/facilities" },
+    { keywords: ["policy", "rules", "terms"], name: "View Policy", path: "/policy" },
+    { keywords: ["contact", "help", "support"], name: "Contact", path: "/contact" },
+    { keywords: ["dashboard", "account", "profile"], name: "Dashboard", path: "/dashboard" },
+  ];
+
+  const handleSearch = (event) => {
+    const query = event.target.value.toLowerCase();
+    setSearchQuery(query);
+
+    if(query.trim() == "" ) {
+      setSearchResult([]);
+      return;
+    }
+
+    const filteredResults = keywordToPageMap.filter((item) => 
+    item.keywords.some((keyword) => keyword.includes(query))
+    );
+
+    setSearchResult(filteredResults);
+  };
+
+  const handleSearchClick = (path) => {
+    navigate(path);
+    setSearchQuery("");  // Clear search input
+    setSearchResult([]); // Hide results
+  };
 
   const handleClickOutside = (event) => {
     if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
@@ -55,8 +91,22 @@ const Header = () => {
         </div>
 
         <div className="center">
-          <input type="text" placeholder="Search" className="search-bar" />
+          <input type="text" 
+                 placeholder="Search" 
+                 className="search-bar"
+                 value={searchQuery}
+                 onChange={handleSearch} 
+                 />
           <FaFilter className="filter-icon icon" />
+          {searchResults.length > 0 && (
+              <div className="search-results">
+                {searchResults.map((item, index) => (
+                  <p key={index} onClick={() => handleSearchClick(item.path)}>
+                    {item.name}
+                  </p>
+                ))}
+              </div>
+            )}
         </div>
 
         <div className="right">

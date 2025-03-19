@@ -116,7 +116,7 @@ const Register = () => {
               required
             />
             {errors.captcha && <span className="error">{errors.captcha}</span>}
-
+<br/>
             {/* Register Button */}
             <button type="submit" className="reg-btn">Register</button>
           </form>
