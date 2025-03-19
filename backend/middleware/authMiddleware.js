@@ -5,11 +5,11 @@ const dotenv = require("dotenv");
 
 dotenv.config();
 
-const verifyToken = (req, res, next) => {
+const authenticateUser = (req, res, next) => {
   const token = req.header("Authorization");
 
   if (!token) {
-    return res.status(403).json({ message: "Access denied!" });
+    return res.status(403).json({ message: "Access denied. No token provided." });
   }
 
   try {
@@ -21,4 +21,4 @@ const verifyToken = (req, res, next) => {
   }
 };
 
-module.exports = verifyToken;
+module.exports = {authenticateUser};
