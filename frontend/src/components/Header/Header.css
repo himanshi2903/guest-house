@@ -1,10 +1,11 @@
+/* Header */
 header {
   padding: 0;
   margin: 0;
   width: 100%;
-  /* width: 100vw; */
 }
 
+/* Top Blue Header */
 .blue-header {
   background-color: #0c2d6b;
   color: #fdb927;
@@ -18,6 +19,7 @@ header {
   gap: 1rem;
 }
 
+/* Main Header */
 .main-header {
   background-color: #d1d1d1;
   display: flex;
@@ -26,6 +28,7 @@ header {
   padding: 10px;
 }
 
+/* Sections */
 .center, .right, .left {
   display: flex;
   gap: 0.5rem;
@@ -34,6 +37,7 @@ header {
   font-weight: bold;
 }
 
+/* Input */
 .center input {
   border: none;
   border-radius: 15px;
@@ -42,66 +46,50 @@ header {
   flex-grow: 1;
 }
 
+/* Menu Icon */
 .menu-icon {
   font-size: 30px;
   cursor: pointer;
 }
 
-.dropdown-menu {
+/* Dropdown Menus */
+.dropdown-menu, .dropdown-menu-user {
   position: absolute;
   top: 10rem;
-  left: 1rem;
   background-color: #d1d1d1;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   border-radius: 5px;
-  width: 12rem;
   z-index: 10;
 }
 
-.dropdown-menu ul {
-  list-style: none;
-  margin: 0;
-  padding: 0;
-}
-
-.dropdown-menu li {
-  padding: 10px;
-  cursor: pointer;
-  border-bottom: 1px solid #ddd;
-}
-
-.dropdown-menu li:hover {
-  background-color: #f0f0f0;
+.dropdown-menu {
+  left: 1rem;
+  width: 12rem;
 }
 
 .dropdown-menu-user {
-  position: absolute;
-  top: 10rem;
   right: 1rem;
-  background-color: #d1d1d1;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  border-radius: 5px;
   width: 10rem;
-  z-index: 10;
 }
 
-.dropdown-menu-user ul {
+.dropdown-menu ul, .dropdown-menu-user ul {
   list-style: none;
   margin: 0;
   padding: 0;
 }
 
-.dropdown-menu-user li {
+.dropdown-menu li, .dropdown-menu-user li {
   padding: 10px;
   cursor: pointer;
   border-bottom: 1px solid #ddd;
   text-align: right;
 }
 
-.dropdown-menu-user li:hover {
+.dropdown-menu li:hover, .dropdown-menu-user li:hover {
   background-color: #f0f0f0;
 }
 
+/* Search */
 .center {
   position: relative;
   display: flex;
@@ -154,6 +142,7 @@ header {
   background: #f0f0f0;
 }
 
+/* Filter Icon */
 .filter-icon {
   margin-left: 10px;
   cursor: pointer;
@@ -163,4 +152,70 @@ header {
 
 .filter-icon:hover {
   color: #0056b3;
+}
+
+/* ✅ Media Queries for Responsiveness */
+
+/* Tablets */
+@media (max-width: 768px) {
+  .blue-header {
+    font-size: 1.2rem;
+    padding: 0.8rem;
+  }
+  
+  .main-header {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .center {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .search-bar {
+    width: 90%;
+  }
+}
+
+/* Mobile */
+@media (max-width: 480px) {
+  .blue-header {
+    font-size: 1rem;
+    padding: 0.5rem;
+  }
+
+  .main-header {
+    flex-direction: column;
+    padding: 5px;
+  }
+
+  .left, .center, .right {
+    flex-direction: column;
+    font-size: 1rem;
+    gap: 0.3rem;
+  }
+
+  .menu-icon {
+    font-size: 24px;
+  }
+
+  .search-bar {
+    width: 100%;
+    padding: 8px;
+  }
+
+  .dropdown-menu, .dropdown-menu-user {
+    width: 100%;
+    left: 0;
+    right: 0;
+    text-align: center;
+  }
+}
+.clickable-logo {
+  cursor: pointer;
+}
+.icon{
+  width: 30px;
+  cursor:pointer;
 }

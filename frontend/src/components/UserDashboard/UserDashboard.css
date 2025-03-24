@@ -1,0 +1,90 @@
+/* Ensure header is fully displayed */
+.dashboard-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+    text-align: center;
+  }
+  
+  /* Adjust table styling */
+  .dashboard-container table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+  }
+  
+  .dashboard-container th,
+  .dashboard-container td {
+    border: 1px solid #ddd;
+    padding: 10px;
+    text-align: center;
+  }
+  
+  .dashboard-container th {
+    background-color: hsl(211, 100%, 18%);
+    color: white;
+  }
+  
+  /* Improve header visibility */
+  header {
+    width: 100%;
+    background-color: #333;
+    padding: 15px 0;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1000;
+  }
+  
+  nav {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  nav ul {
+    list-style: none;
+    padding: 0;
+    display: flex;
+  }
+  
+  nav ul li {
+    margin: 0 15px;
+  }
+  
+  nav ul li a {
+    color: white;
+    text-decoration: none;
+    font-size: 18px;
+    font-weight: bold;
+  }
+  
+  nav ul li a:hover {
+    text-decoration: underline;
+  }
+  
+  /* Add padding to prevent content from overlapping the header */
+  .dashboard-container {
+    padding-top: 180px;
+  }
+  
+  /* Responsive Design */
+  @media (max-width: 768px) {
+    .dashboard-container {
+      width: 95%;
+    }
+  
+    nav {
+      flex-direction: column;
+    }
+  
+    nav ul {
+      flex-direction: column;
+      text-align: center;
+    }
+  
+    nav ul li {
+      margin: 10px 0;
+    }
+  }
+  

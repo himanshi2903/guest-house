@@ -1,5 +1,5 @@
 import React from "react";
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom";
 import "./App.css";
 
 import Home from "./components/Home/Home";
@@ -10,15 +10,19 @@ import Facilities from "./components/Facilities/Facilities";
 import Policy from "./components/Policy/Policy";
 import Contact from "./components/Contact/Contact";
 
-import AdminLogin from "./admin/AdminLogin";
-import AdminFooter from "./admin/AdminFooter";
-import AdminDashboard from "./admin/AdminDashboard";
+import UserDashboard from "./components/UserDashboard/UserDashboard"; 
+
+
+const PrivateRoute = ({ children }) => {
+  return localStorage.getItem("token") ? children : <Navigate to="/login" />;
+};
 
 const App = () => {
   return (
     <Router>
       <div className="app">
         <Routes>
+          
           <Route path="/" element={<Home />} />
           <Route path="/allrooms" element={<AllRooms />} />
           <Route path="/login" element={<Login />} />
@@ -27,9 +31,10 @@ const App = () => {
           <Route path="/policy" element={<Policy />} />
           <Route path="/contact" element={<Contact />} />
 
-          <Route path="/admin" element={<AdminLogin />} />
-          <Route path="/admin-footer" element={<AdminFooter />} />
-          <Route path="/admin-dashboard" element={<AdminDashboard />} />
+          
+          <Route path="/dashboard" element={<PrivateRoute><UserDashboard /></PrivateRoute>} />
+
+          
         </Routes>
       </div>
     </Router>

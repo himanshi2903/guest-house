@@ -1,7 +1,8 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Footer from "../Footer/Footer";
 import "./Register.css";
+import axios from "axios";
 
 const generateCaptcha = () => {
   const chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
@@ -13,29 +14,19 @@ const generateCaptcha = () => {
 };
 
 const Register = () => {
+  const navigate = useNavigate();
   const [captcha, setCaptcha] = useState(generateCaptcha());
-  const [username, setUsername] = useState("");
+  const [name, setName] = useState(""); // Added name state
+  const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [enteredCaptcha, setEnteredCaptcha] = useState("");
   const [errors, setErrors] = useState({});
-  const [passwordStrength, setPasswordStrength] = useState("");
 
-  const validateUsername = (value) => {
+  const validateEmail = (value) => {
     let error = "";
-    if (/^\d/.test(value)) error = "❌ Username cannot start with a digit.";
-    setErrors((prev) => ({ ...prev, username: error }));
-  };
-
-  const validatePassword = (value) => {
-    let error = "";
-    if (value.length < 6) error = "❌ Password must be at least 6 characters.";
-    else if (!/[!@#$%^&*(),.?":{}|<>]/.test(value)) error = "❌ Must include a special character.";
-    else if (!/\d/.test(value)) error = "❌ Must contain at least one digit.";
-    setErrors((prev) => ({ ...prev, password: error }));
-
-    if (value.length < 6) setPasswordStrength("Weak ❌");
-    else if (/[!@#$%^&*(),.?":{}|<>]/.test(value) && /\d/.test(value)) setPasswordStrength("Strong ✅");
-    else setPasswordStrength("Medium ⚠");
+    const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailPattern.test(value)) error = "❌ Invalid email format.";
+    setErrors((prev) => ({ ...prev, email: error }));
   };
 
   const validateCaptcha = (value) => {
@@ -43,44 +34,69 @@ const Register = () => {
     setErrors((prev) => ({ ...prev, captcha: error }));
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    if (!errors.username && !errors.password && !errors.captcha) {
-      alert("Registration Successful!");
+    if (errors.email || errors.captcha) {
+      return;
+    }
+
+    try {
+      const response = await axios.post("http://localhost:5000/auth/register", {
+        name, // Sending name to backend
+        email,
+        password,
+      });
+
+      alert(response.data.message); // Show success message
+      navigate("/login"); // Redirect to login page
+    } catch (error) {
+      setErrors({ register: error.response?.data?.error || "Registration failed" });
     }
   };
 
   const refreshCaptcha = () => {
     setCaptcha(generateCaptcha());
-    setEnteredCaptcha(""); // Clear input
+    setEnteredCaptcha(""); 
   };
 
   return (
     <div className="container">
-      <div className="blue-header">
-        <img src="/sgsits_logo.png" alt="gs-logo" />
+      <div className="blue-header" onClick={() => navigate("/")}>
+      <img src="/sgsits_logo.png" alt="gs-logo" className="clickable-logo"/>
         <span className="gs">
-          SHRI GOVINDERAM SEKSARIA INSTITUTE OF TECHNOLOGY & SCIENCE, INDORE
+          SHRI GOVINDRAM SEKSARIA INSTITUTE OF TECHNOLOGY & SCIENCE, INDORE
         </span>
       </div>
       <div className="reg-container">
         <div className="reg-box">
           <h3>Register</h3>
           <form onSubmit={handleSubmit}>
-            {/* Username Field */}
+            {/* Name Field */}
             <div className="input-group">
-              <label>Username:</label>
+              <label>Name:</label>
               <input
                 type="text"
-                placeholder="Enter Username"
-                value={username}
+                placeholder="Enter Your Name"
+                value={name}
+                onChange={(e) => setName(e.target.value)}
+                required
+              />
+            </div>
+
+            {/* Email Field */}
+            <div className="input-group">
+              <label>Email:</label>
+              <input
+                type="email"
+                placeholder="Enter Email"
+                value={email}
                 onChange={(e) => {
-                  setUsername(e.target.value);
-                  validateUsername(e.target.value);
+                  setEmail(e.target.value);
+                  validateEmail(e.target.value);
                 }}
                 required
               />
-              {errors.username && <span className="error">{errors.username}</span>}
+              {errors.email && <span className="error">{errors.email}</span>}
             </div>
 
             {/* Password Field */}
@@ -90,14 +106,9 @@ const Register = () => {
                 type="password"
                 placeholder="Enter Password"
                 value={password}
-                onChange={(e) => {
-                  setPassword(e.target.value);
-                  validatePassword(e.target.value);
-                }}
+                onChange={(e) => setPassword(e.target.value)}
                 required
               />
-              {errors.password && <span className="error">{errors.password}</span>}
-              {password && <span className={`strength ${passwordStrength}`}>{passwordStrength}</span>}
             </div>
 
             {/* Captcha Field */}
@@ -116,10 +127,13 @@ const Register = () => {
               required
             />
             {errors.captcha && <span className="error">{errors.captcha}</span>}
-<br/>
+            <br/>
+
             {/* Register Button */}
             <button type="submit" className="reg-btn">Register</button>
           </form>
+          {errors.register && <span className="error">{errors.register}</span>}
+          
           <p>
             Already have an account? <Link to="/login">Login here</Link>
           </p>

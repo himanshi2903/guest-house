@@ -1,46 +1,57 @@
-const Booking = require("../models/Booking");
+const db = require("../config/db");
 
-const bookRoom = async (req, res) => {
+const createBooking = async (req, res) => {
   try {
-    const { room_type, check_in, check_out, name, mobile, aadhar } = req.body;
-    const user_id = req.user?.id;
+    const { user_id, room_type, num_rooms, num_beds, checkin_date, checkin_time, checkout_date, aadhar, phone_booking, booking_name } = req.body;
 
-    if (
-      !user_id ||
-      !room_type ||
-      !check_in ||
-      !check_out ||
-      !name ||
-      !mobile ||
-      !aadhar
-    ) {
-      return res.status(400).json({ error: "All fields are required" });
+    if (!user_id || !room_type || !checkin_date || !checkout_date || !aadhar || !phone_booking || !booking_name) {
+      return res.status(400).json({ message: "All required fields must be provided, including Aadhar and phone number." });
     }
 
-    await Booking.bookRoom(
-      user_id,
-      room_type,
-      check_in,
-      check_out,
-      name,
-      mobile,
-      aadhar
-    );
-    res.json({ message: "Booking successful!" });
+    const query = `
+      INSERT INTO bookings (user_id, room_type, num_rooms, num_beds, checkin_date, checkin_time, checkout_date, aadhar, phone_booking, booking_name)
+      VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?,?)
+    `;
+
+    await db.execute(query, [user_id, room_type, num_rooms, num_beds, checkin_date, checkin_time, checkout_date, aadhar, phone_booking, booking_name]);
+
+    res.status(201).json({ message: "✅ Booking successful!" });
   } catch (error) {
-    console.error("Booking Error: ", error);
-    res.status(500).json({ error: "Booking failed. Please try again" });
+    console.error("❌ Booking error:", error);
+    res.status(500).json({ message: "Server error. Please try again later." });
   }
 };
 
-const getAllBookings = async (req, res) => {
+const getUserBookings = async (req, res) => {
   try {
-    const bookings = await Booking.getAllBookings();
-    res.json(bookings);
+    const { user_id } = req.params;
+
+    if (!user_id) {
+      return res.status(400).json({ message: "User ID is required" });
+    }
+
+    const query = `
+      SELECT id, user_id, room_type, num_rooms, num_beds, 
+             DATE_FORMAT(checkin_date, '%Y-%m-%d') AS checkin_date, 
+             TIME_FORMAT(checkin_time, '%h:%i %p') AS checkin_time, 
+             DATE_FORMAT(checkout_date, '%Y-%m-%d') AS checkout_date,
+             status,phone_booking,booking_name
+      FROM bookings WHERE user_id = ?
+    `;
+
+    db.query(query, [user_id], (err, results) => {
+      if (err) {
+        console.error("Database error:", err);
+        return res.status(500).json({ message: "Server error" });
+      }
+
+      res.status(200).json(results);
+    });
   } catch (error) {
     console.error("Error fetching bookings:", error);
-    res.status(500).json({ error: "Failed to fetch bookings!" });
+    res.status(500).json({ message: "Internal server error" });
   }
 };
 
-module.exports = { bookRoom, getAllBookings };
+
+module.exports = { createBooking, getUserBookings };
