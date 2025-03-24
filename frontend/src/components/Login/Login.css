@@ -140,3 +140,8 @@ select {
   .forgot-password:hover {
      color: blue;
   }
+
+  .clickable-logo {
+    cursor: pointer;
+  }
+  

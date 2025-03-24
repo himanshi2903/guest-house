@@ -1,72 +1,83 @@
-const bcrypt = require("bcryptjs");
+const db = require("../config/db");
 const jwt = require("jsonwebtoken");
-const User = require("../models/User");
-const dotenv = require("dotenv");
+const bcrypt = require("bcryptjs");
+require("dotenv").config();
 
-dotenv.config();
+exports.register = async (req, res) => {
+  const { name, email, password } = req.body;
 
-// Register User
-const register = async (req, res) => {
-  const { name, email, password, isAdmin } = req.body;
-
-  if (!name || !email || !password) {
-    return res.status(400).json({ message: "All fields are required!" });
-  }
-
-  try {
-    const existingUser = await User.findByEmail(email);
-    if (existingUser.length > 0) {
-      return res.status(400).json({ message: "Email already exists!" });
+    if (!name || !email || !password) {
+        return res.status(400).json({ error: "All fields are required" });
     }
 
-    const hashedPassword = await bcrypt.hash(password, 10);
-    await User.createUser(name, email, hashedPassword, isAdmin ? 1 : 0);
+  try {
+    db.query("SELECT * FROM users WHERE email = ?", [email], async (err, result) => {
+      if (err) {
+        return res.status(500).json({ error: "Database error" });
+      }
+      if (result.length > 0) {
+        return res.status(400).json({ error: "Email is already registered" });
+      }
 
-    res.status(201).json({ message: "User registered successfully!" });
+      const hashedPassword = await bcrypt.hash(password, 10);
+
+      db.query("INSERT INTO users (name,email, password) VALUES (?,?, ?)", [name,email, hashedPassword], (err, result) => {
+        if (err) {
+          return res.status(500).json({ error: "Error registering user" });
+        }
+        res.status(201).json({ message: "User registered successfully" });
+      });
+    });
   } catch (error) {
-    res
-      .status(500)
-      .json({ message: "Error registering user", error: error.message });
+    res.status(500).json({ error: "Server error" });
   }
 };
 
-// Login User
-const login = async (req, res) => {
+exports.login = async (req, res) => {
   const { email, password } = req.body;
 
   if (!email || !password) {
-    return res.status(400).json({ message: "All fields are required!" });
+    return res.status(400).json({ error: "All fields are required" });
   }
 
   try {
-    const results = await User.findByEmail(email);
+    db.query("SELECT * FROM users WHERE email = ?", [email], async (err, result) => {
+      if (err) {
+        return res.status(500).json({ error: "Database error" });
+      }
+      if (result.length === 0) {
+        return res.status(401).json({ error: "Invalid email or password" });
+      }
 
-    if (results.length === 0) {
-      return res.status(401).json({ message: "Invalid email or password!" });
-    }
+      const user = result[0];
 
-    const user = results[0];
 
-    const isMatch = await bcrypt.compare(password, user.password);
-    if (!isMatch) {
-      return res.status(401).json({ message: "Invalid email or password!" });
-    }
 
-    const token = jwt.sign(
-      { id: user.id, email: user.email, isAdmin: user.is_admin }, 
-      process.env.JWT_SECRET,
-      { expiresIn: "3h" }
-    );
+      const isMatch = await bcrypt.compare(password, user.password);
+      if (!isMatch) {
+        return res.status(401).json({ error: "Invalid email or password" });
+      }
 
-    res.status(200).json({
-      message: "Login successful!",
-      token,
-      userId: user.id,
-      isAdmin: user.is_admin, // isAdmin in response
+      const token = jwt.sign(
+        { user_id: user.id, email: user.email, name: user.name, isAdmin: user.isAdmin }, 
+        process.env.JWT_SECRET,
+        { expiresIn: "1h" }
+      );
+
+      res.json({
+        message: "Login successful",
+        token,
+        user_id: user.id,
+        name: user.name,
+        isAdmin: user.isAdmin, 
+      });
     });
   } catch (error) {
-    res.status(500).json({ message: "Error logging in", error: error.message });
+    res.status(500).json({ error: "Server error" });
   }
 };
 
-module.exports = { register, login };
+
+exports.logout = (req, res) => {
+  res.json({ message: "User logged out successfully" });
+};

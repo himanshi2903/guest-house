@@ -136,3 +136,6 @@ select {
     background-color: white;
     padding: .5rem;
   }
+  .clickable-logo {
+    cursor: pointer;
+  }

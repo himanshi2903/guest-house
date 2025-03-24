@@ -1,4 +1,5 @@
 import React from "react";
+import { useNavigate } from "react-router-dom"; 
 import Header from "../Header/Header";
 import Button from "../Button/Button";
 import Slideshow from "../Slideshow/Slideshow";
@@ -6,6 +7,8 @@ import Footer from "../Footer/Footer";
 import "./Home.css";
 
 const Home = () => {
+  const navigate = useNavigate(); 
+
   const images = [
     { src: "AC-Room.png", text: "AC & Non-AC Rooms" },
     { src: "dining.png", text: "Dining Area" },
@@ -16,7 +19,7 @@ const Home = () => {
 
   const img = [
     { src: "hall.png", title: "Spacious Rooms" },
-    { src:"dining1.png", title: "Dining Hall" },
+    { src: "dining1.png", title: "Dining Hall" },
     { src: "corridor.png", title: "Wi-Fi Connectivity" },
     { src: "living.png", title: "Living Room" },
     { src: "gym.png", title: "Gym Area" },
@@ -32,7 +35,7 @@ const Home = () => {
             Welcome to, <br />
             <span>Narmada Guest House</span>
           </h3>
-          <Button text="View Rooms" />
+          <Button text="View Rooms"onClick={() => navigate("/allrooms")} />
         </div>
       </div>
 
@@ -44,23 +47,11 @@ const Home = () => {
       <div className="brief">
         <h3>THE GUEST HOUSE</h3>
         <p>
-          Lorem ipsum, dolor sit amet consectetur adipisicing elit. Assumenda in
-          eaque porro reprehenderit voluptatem fugit nobis! In error illum id
-          soluta nemo aut, officia autem nisi eligendi quidem reiciendis,
-          impedit distinctio perspiciatis consectetur, nobis illo. Doloremque
-          nemo corporis laboriosam quis animi consequuntur officia vel aut ad,
-          expedita nostrum autem ipsam deleniti, provident veritatis. Debitis
-          numquam inventore tempore omnis laborum ipsa et placeat? Voluptatum,
-          repudiandae est. Suscipit repellat enim assumenda saepe nobis eaque
-          rem repudiandae blanditiis. Beatae explicabo, temporibus totam
-          dignissimos adipisci odit non eum placeat alias consectetur, libero
-          hic. Delectus modi voluptate fugiat quis et qui non officiis deserunt
-          accusantium, ipsa ut, mollitia, ratione ex soluta laudantium ducimus.
-          Consectetur aut explicabo molestias eveniet reiciendis repudiandae
-          eaque repellendus dicta incidunt facilis nam quidem totam hic, ab
-          molestiae sed magni. Minus doloribus quasi maiores necessitatibus quia
-          facilis non harum unde facere! Blanditiis ipsam animi aliquid quidem
-          adipisci delectus cumque iste eveniet nemo.
+        Narmada Guest House at SGSITS Indore provides a warm, comfortable, and convenient stay for visitors, faculty, and guests.
+         Strategically located in the heart of Indore, near the railway station, the guest house is nestled within the lush, green,
+          and well-maintained campus of SGSITS. Our well-equipped rooms, modern amenities, and serene surroundings create a peaceful
+           environment, ensuring a pleasant and relaxing experience. Whether you're visiting for academic engagements, professional work,
+            or a short stay, our hospitality ensures a home-like comfort with exceptional cleanliness and a welcoming atmosphere.
         </p>
       </div>
 
@@ -79,17 +70,17 @@ const Home = () => {
           <tbody>
             <tr>
               <td>1</td>
-              <td>AC Room</td>
+              <td>Single-Bed Room</td>
               <td>Visitor</td>
-              <td>2</td>
+              <td>1</td>
               <td>Rs.1500/night</td>
             </tr>
             <tr>
               <td>2</td>
-              <td>Non-AC Room</td>
+              <td>Double-Bed Room</td>
               <td>Visitor</td>
               <td>2</td>
-              <td>Rs.1500/night</td>
+              <td>Rs.2000/night</td>
             </tr>
             <tr>
               <td>3</td>
@@ -121,7 +112,7 @@ const Home = () => {
         <div className="team-members">
           <div className="team-member">
             <div className="team-photo">
-              <img src="man.jpeg" />
+              <img src="man.jpeg" alt={img.title} />
             </div>
             <p>
               <strong>Prof. Ravi Jatola</strong>
@@ -130,7 +121,7 @@ const Home = () => {
           </div>
           <div className="team-member">
             <div className="team-photo">
-              <img src="caretaker.png" />
+              <img src="caretaker.png" alt={img.title}/>
             </div>
             <p>
               <strong>Prakash Pal</strong>
