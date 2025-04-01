@@ -3,20 +3,20 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import "./UserDashboard.css";
 import Header from "../Header/Header";
+import TransactionForm from "../TransactionForm/TransactionForm";
 
 const UserDashboard = () => {
   const [bookings, setBookings] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [userName, setUserName] = useState(""); 
+  const [userName, setUserName] = useState("");
+  const [selectedBookingId, setSelectedBookingId] = useState(null);
+  const [showTransactionForm, setShowTransactionForm] = useState(false);
+  const [initialTransactionData, setInitialTransactionData] = useState(null);
   const navigate = useNavigate();
 
   useEffect(() => {
     const storedName = localStorage.getItem("name");
-    if (storedName) {
-      setUserName(storedName); 
-    } else {
-      setUserName("Guest"); 
-    }
+    setUserName(storedName || "Guest");
 
     const fetchBookings = async () => {
       const token = localStorage.getItem("token");
@@ -34,10 +34,10 @@ const UserDashboard = () => {
         });
 
         setBookings(response.data);
-        setLoading(false);
       } catch (error) {
         console.error("Error fetching bookings:", error);
         alert("Failed to load bookings. Try again later.");
+      } finally {
         setLoading(false);
       }
     };
@@ -45,10 +45,33 @@ const UserDashboard = () => {
     fetchBookings();
   }, [navigate]);
 
+  const handleTransactionAction = async (bookingId) => {
+    const token = localStorage.getItem("token");
+
+    try {
+      const response = await axios.get(`http://localhost:5000/transactions/booking/${bookingId}`, {
+        headers: { Authorization: `Bearer ${token}` },
+      });
+
+      setInitialTransactionData(response.data); 
+    } catch {
+      setInitialTransactionData(null); 
+    }
+
+    setSelectedBookingId(bookingId);
+    setShowTransactionForm(true);
+  };
+
+  const closeTransactionForm = () => {
+    setShowTransactionForm(false);
+    setSelectedBookingId(null);
+    setInitialTransactionData(null);
+  };
+
   return (
     <div className="dashboard-container">
       <Header />
-      <h2>Welcome {userName}</h2> 
+      <h2>Welcome {userName}</h2>
       <h2>Your Bookings</h2>
 
       {loading ? (
@@ -65,6 +88,7 @@ const UserDashboard = () => {
               <th>Check-in Time</th>
               <th>Check-out Date</th>
               <th>Guests</th>
+              <th>Transaction Status</th>
               <th>Status</th>
             </tr>
           </thead>
@@ -77,11 +101,27 @@ const UserDashboard = () => {
                 <td>{booking.checkin_time}</td>
                 <td>{booking.checkout_date}</td>
                 <td>{booking.num_rooms || booking.num_beds}</td>
+                <td>
+                  <button
+                    className="transaction-btn"
+                    onClick={() => handleTransactionAction(booking.id)}
+                  >
+                    {booking.transaction_id ? "Edit Transaction" : "Add / Edit Transaction"}
+                  </button>
+                </td>
                 <td>{booking.status}</td>
               </tr>
             ))}
           </tbody>
         </table>
+      )}
+
+      {showTransactionForm && (
+        <TransactionForm
+          bookingId={selectedBookingId}
+          initialData={initialTransactionData}
+          onClose={closeTransactionForm}
+        />
       )}
     </div>
   );

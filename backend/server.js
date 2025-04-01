@@ -5,9 +5,10 @@ const dotenv = require("dotenv");
 const db = require("./config/db");
 const authRoutes = require("./routes/authRoutes");
 const bookingRoutes = require("./routes/bookingRoutes");
-const authMiddleware = require("./middleware/authMiddleware");
 const adminRoutes = require("./routes/adminRoutes");
+const transactionRoutes = require("./routes/transactions"); // ✅ NEW
 
+const authMiddleware = require("./middleware/authMiddleware");
 
 dotenv.config();
 
@@ -22,8 +23,8 @@ app.use(bodyParser.urlencoded({ extended: true }));
 // Routes
 app.use("/auth", authRoutes);
 app.use("/bookings", authMiddleware.verifyToken, bookingRoutes);
+app.use("/transactions", authMiddleware.verifyToken, transactionRoutes); // ✅ Plugged in
 app.use("/admin", authMiddleware.verifyToken, adminRoutes);
-
 
 // Default Route
 app.get("/", (req, res) => {

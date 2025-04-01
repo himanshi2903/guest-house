@@ -1,0 +1,103 @@
+.transaction-form-container {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 90%;
+    max-width: 450px;
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+    z-index: 1001;
+    overflow: auto;
+    max-height: 90vh;
+    animation: fadeIn 0.3s ease-in-out;
+  }
+  
+  .transaction-form {
+    text-align: center;
+  }
+  
+  .transaction-title {
+    font-size: 1.8rem;
+    color: #0c2d6b;
+    margin-bottom: 15px;
+  }
+  
+  .transaction-form label {
+    display: block;
+    font-weight: bold;
+    margin-top: 10px;
+    color: #333;
+    text-align: left;
+  }
+  
+  .transaction-form input {
+    width: 100%;
+    padding: 8px;
+    margin-top: 5px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 1rem;
+  }
+  
+  .transaction-form button {
+    margin-top: 15px;
+    width: 100%;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    font-size: 1rem;
+    cursor: pointer;
+  }
+  
+  .book-btn {
+    background-color: #0c2d6b;
+    color: white;
+  }
+  
+  .book-btn:hover {
+    background-color: #08306b;
+  }
+  
+  .close-btn {
+    background-color: #dc3545;
+    color: white;
+    margin-top: 10px;
+  }
+  
+  .close-btn:hover {
+    background-color: #b52d3a;
+  }
+  
+  /* Fade-in animation */
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(-10px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  .qr-payment-section {
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  
+  .qr-image {
+    width: 200px;
+    height: auto;
+    margin: 10px 0;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+  }
+  
+  .bank-details p {
+    margin: 2px 0;
+    color: #333;
+    font-size: 0.95rem;
+  }
+  

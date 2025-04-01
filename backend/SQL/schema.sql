@@ -32,3 +32,15 @@ CREATE TABLE bookings (
 
 INSERT INTO users (name, email, password, isAdmin)
 VALUES ('Admin', 'admin@gmail.com', '$2y$10$sWEbpUs4M4v7Wl2Xyx1OFeL/nLG7B6/LxdEfwhXKdLJWeFgi/SUgK', TRUE);
+
+--added transaction table
+
+ CREATE TABLE transactions (
+        id INT AUTO_INCREMENT PRIMARY KEY,
+         booking_id INT NOT NULL,
+         transaction_id VARCHAR(50) NOT NULL,
+         sender_account_name VARCHAR(255) NOT NULL,
+         amount DECIMAL(10,2) NOT NULL,
+         created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+         FOREIGN KEY (booking_id) REFERENCES bookings(id) ON DELETE CASCADE
+     );

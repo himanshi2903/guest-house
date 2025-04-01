@@ -19,10 +19,20 @@ const getDashboardStats = async (req, res) => {
 
 const getAllBookings = async (req, res) => {
   try {
-    const [bookings] = await db.promise().query("SELECT * FROM bookings ORDER BY id DESC");
+    const [bookings] = await db.promise().query(`
+      SELECT 
+        b.*,
+        t.transaction_id,
+        t.sender_account_name,
+        t.amount
+      FROM bookings b
+      LEFT JOIN transactions t ON b.id = t.booking_id
+      ORDER BY b.id DESC
+    `);
+
     res.json(bookings);
   } catch (error) {
-    console.error("Error fetching bookings:", error);
+    console.error("Error fetching bookings with transactions:", error);
     res.status(500).json({ message: "Server error" });
   }
 };
@@ -81,4 +91,8 @@ const deleteUser = async (req, res) => {
   }
 };
 
-module.exports = { getDashboardStats, getAllBookings, updateBookingStatus, getAllUsers, updateUser, deleteUser };
+
+
+module.exports = { getDashboardStats, getAllBookings, updateBookingStatus, getAllUsers, updateUser, deleteUser, };
+
+

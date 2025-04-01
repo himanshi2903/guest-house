@@ -187,3 +187,23 @@
         width: 95%;
     }
 }
+
+.qr-payment-section {
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  
+  .qr-image {
+    width: 200px;
+    height: auto;
+    margin: 10px 0;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+  }
+  
+  .bank-details p {
+    margin: 2px 0;
+    font-size: 0.95rem;
+    color: #333;
+  }
+  

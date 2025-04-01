@@ -1,28 +1,10 @@
-import React, { useState } from "react";
+import React from "react";
 import "./Contact.css";
 import Header from "../Header/Header";
-import Button from "../Button/Button";
 import Footer from "../Footer/Footer";
 
 
 const Contact = () => {
-  const [formData, setFormData] = useState({
-    name: "",
-    email: "",
-    message: "",
-  });
-
-  const handleChange = (e) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
-  };
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    alert("Message sent successfully!");
-    setFormData({ name: "", email: "", message: "" });
-  };
-
-  
 
   return (
     <div>
@@ -31,33 +13,15 @@ const Contact = () => {
         <h1 className="contact-title">Contact Us</h1>
         <div className="contact-content">
           <div className="contact-form">
-            <h2>Send Us a Message</h2>
-            <form onSubmit={handleSubmit}>
-              <input
-                type="text"
-                name="name"
-                placeholder="Your Name"
-                value={formData.name}
-                onChange={handleChange}
-                required
-              />
-              <input
-                type="email"
-                name="email"
-                placeholder="Your Email"
-                value={formData.email}
-                onChange={handleChange}
-                required
-              />
-              <textarea
-                name="message"
-                placeholder="Your Message"
-                value={formData.message}
-                onChange={handleChange}
-                required
-              />
-              <Button text="Send Message"/>
-            </form>
+            <h2>Bank Details</h2>
+            
+  <div className="bank-details">
+    <p><strong>Bank Name:</strong> State Bank of India</p>
+    <p><strong>Account Name:</strong> SGSITS Guest House</p>
+    <p><strong>Account No:</strong> 1234567890</p>
+    <p><strong>IFSC Code:</strong> SBIN0001234</p>
+    <img src="/qr-code.png" alt="QR Code for Payment" className="qr-image" />
+  </div>
           </div>
           <div className="contact-info">
             <h2>Get in Touch</h2>

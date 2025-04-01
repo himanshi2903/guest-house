@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import Sidebar from "../components/Sidebar";
 import Navbar from "../components/Navbar";
-import { fetchAllUsers, deleteUser } from "../services/api"; 
+import { fetchAllUsers } from "../services/api"; 
 
 const Users = () => {
   const [users, setUsers] = useState([]);
@@ -18,10 +18,7 @@ const Users = () => {
   }, []);
 
   
-  const handleDelete = async (id) => {
-    await deleteUser(id);
-    setUsers((prev) => prev.filter((user) => user.id !== id));
-  };
+  
 
   return (
     <div className="admin-container">
@@ -37,7 +34,7 @@ const Users = () => {
                 <th>Name</th>
                 <th>Email</th>
                 
-                <th>Actions</th>
+                
               </tr>
             </thead>
             <tbody>
@@ -48,9 +45,7 @@ const Users = () => {
                     <td>{user.name}</td>
                     <td>{user.email}</td>
                     
-                    <td>
-                      <button onClick={() => handleDelete(user.id)}>Delete</button>
-                    </td>
+                    
                   </tr>
                 ))
               ) : (

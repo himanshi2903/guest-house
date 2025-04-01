@@ -1,6 +1,7 @@
 const express = require("express");
 const authMiddleware = require("../middleware/authMiddleware");
-const { getDashboardStats, getAllBookings, updateBookingStatus, getAllUsers, updateUser, deleteUser } = require("../controllers/adminController"); // ✅ Make sure these exist
+const { getDashboardStats, getAllBookings, updateBookingStatus, getAllUsers, updateUser, deleteUser,getBookingReports } = require("../controllers/adminController"); // ✅ Make sure these exist
+
 
 const router = express.Router();
 
