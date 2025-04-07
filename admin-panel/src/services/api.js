@@ -83,3 +83,31 @@ export const deleteUser = async (id) => {
     console.error("Error deleting user:", error.response?.data || error.message);
   }
 };
+
+// ✅ Add these functions to your existing `api.js`
+
+// Fetch availability data
+export const fetchAvailability = async () => {
+  try {
+    const response = await api.get("/admin/availability", {
+      headers: getAuthHeaders(),
+    });
+    return response.data;
+  } catch (error) {
+    console.error("Error fetching availability:", error.response?.data || error.message);
+    return null;
+  }
+};
+
+// Update availability (admin only)
+export const updateAvailability = async (data) => {
+  try {
+    const response = await api.put("/admin/availability", data, {
+      headers: getAuthHeaders(),
+    });
+    return response.data;
+  } catch (error) {
+    console.error("Error updating availability:", error.response?.data || error.message);
+    return false;
+  }
+};

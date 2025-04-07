@@ -5,6 +5,7 @@ import Bookings from "./pages/Bookings";
 import Users from "./pages/Users";
 import ProtectedRoute from "./components/ProtectedRoute";
 import "./styles.css";
+import Availability from "./pages/Availability";
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
           <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/bookings" element={<Bookings />} />
           <Route path="/users" element={<Users />} />
+          <Route path="/availability" element={<Availability />} />
         </Route>
       </Routes>
     </Router>

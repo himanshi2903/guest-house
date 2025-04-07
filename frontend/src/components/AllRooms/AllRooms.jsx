@@ -9,6 +9,7 @@ const AllRooms = () => {
   const [showTransactionForm, setShowTransactionForm] = useState(false);
   const [bookingId, setBookingId] = useState(null);
   const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [availability, setAvailability] = useState({});
 
   const [formData, setFormData] = useState({
     booking_name: "",
@@ -32,21 +33,75 @@ const AllRooms = () => {
   useEffect(() => {
     const token = localStorage.getItem("token");
     if (token) setIsAuthenticated(true);
+
+    const fetchAvailability = async () => {
+      try {
+        const res = await axios.get("http://localhost:5000/admin/availability", {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
+          },
+        });
+
+        console.log("📥 Raw Availability Response:", res.data); // 🧪 Debug here
+
+        const data = res.data;
+
+        if (data && typeof data === "object" && !Array.isArray(data)) {
+          console.log("✅ Setting availability:", data);
+          setAvailability(data);
+        } else if (Array.isArray(data)) {
+          const mapped = {};
+          data.forEach((row) => {
+            mapped[row.type] = {
+              total: row.total,
+              occupied: row.occupied,
+            };
+          });
+          console.log("✅ Mapped availability:", mapped);
+          setAvailability(mapped);
+        } else {
+          throw new Error("Invalid availability format");
+        }
+      } catch (error) {
+        console.error("❌ Failed to fetch availability:", error);
+        
+      }
+    };
+
+    fetchAvailability();
   }, []);
 
   const handleBookNow = (roomType) => {
     if (!isAuthenticated) {
       alert("Login required to book a room!");
       navigate("/login");
-    } else {
-      setFormData((prev) => ({ ...prev, room_type: roomType }));
-      setShowForm(true);
+      return;
     }
+
+    console.log("🟡 Room Type Clicked:", roomType);
+    console.log("📦 Current Availability:", availability);
+
+    let available = 0;
+    if (roomType === "Single") {
+      available = availability.single_total - availability.single_occupied;
+    } else if (roomType === "Double") {
+      available = availability.double_total - availability.double_occupied;
+    } else if (roomType === "Hall") {
+      available = availability.hall_total - availability.hall_occupied;
+    }
+
+    if (available <= 0) {
+      alert(`❌ No ${roomType === "Hall" ? "beds" : "rooms"} available at the moment.`);
+      return;
+    }
+
+    setFormData((prev) => ({ ...prev, room_type: roomType }));
+    setShowForm(true);
   };
 
-  const handleCloseForm = () => {
-    setShowForm(false);
-  };
+
+
+  const handleCloseForm = () => setShowForm(false);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -72,11 +127,6 @@ const AllRooms = () => {
   const handleBookingSubmit = async (e) => {
     e.preventDefault();
     const token = localStorage.getItem("token");
-    if (!token) {
-      alert("You are not logged in. Please log in to proceed.");
-      navigate("/login");
-      return;
-    }
 
     const bookingData = {
       user_id: localStorage.getItem("user_id"),
@@ -100,6 +150,7 @@ const AllRooms = () => {
       });
 
       alert("✅ Booking successful!");
+      setBookingId(response.data.booking_id);
       setFormData({
         booking_name: "",
         phone: "",
@@ -110,7 +161,6 @@ const AllRooms = () => {
         room_type: "",
         aadhar: "",
       });
-      setBookingId(response.data.booking_id); 
       setShowForm(false);
       setShowTransactionForm(true);
     } catch (error) {
@@ -122,11 +172,6 @@ const AllRooms = () => {
   const handleTransactionSubmit = async (e) => {
     e.preventDefault();
     const token = localStorage.getItem("token");
-
-    if (!token || !bookingId) {
-      alert("Missing token or booking ID.");
-      return;
-    }
 
     const transactionDetails = {
       booking_id: bookingId,
@@ -144,12 +189,12 @@ const AllRooms = () => {
       });
 
       alert("✅ Transaction submitted successfully!");
-      setShowTransactionForm(false);
       setTransactionData({
         transaction_id: "",
         sender_account_name: "",
         amount: "",
       });
+      setShowTransactionForm(false);
     } catch (error) {
       console.error("Transaction Error:", error.response?.data || error.message);
       alert("❌ Transaction failed. Please try again.");
@@ -165,17 +210,22 @@ const AllRooms = () => {
       <div className="room-container">
         {["Single", "Double", "Hall"].map((type, index) => (
           <div className="room-card" key={index}>
-            <img src={`/${type === "Single" ? "Non-AC-Room" : type === "Double" ? "AC-Room" : "hall"}.png`} alt={type} className="room-image" />
+            <img
+              src={`/${type === "Single" ? "Non-AC-Room" : type === "Double" ? "AC-Room" : "hall"}.png`}
+              alt={type}
+              className="room-image"
+            />
             <h3 className="room-title">{type} {type === "Hall" ? "(Per Bed)" : "Bed Room"}</h3>
             <p className="room-price">
               {type === "Single" ? "INR 1500 / Night" : type === "Double" ? "INR 2000 / Night" : "INR 300 / Bed"}
             </p>
-            <button className="book-btn" onClick={() => handleBookNow(type)}>Book Now</button>
+            <button className="book-btn" onClick={() => handleBookNow(type)}>
+              Book Now
+            </button>
           </div>
         ))}
       </div>
 
-      
       {showForm && (
         <div className="booking-form-container">
           <div className="booking-form">
@@ -185,22 +235,43 @@ const AllRooms = () => {
               <input type="text" name="booking_name" value={formData.booking_name} onChange={handleChange} required />
 
               <label>Phone:</label>
-              <input type="text" name="phone" value={formData.phone} onChange={handleChange} required minLength="10" maxLength="10" />
-
-              <label>Aadhar Number:</label>
-              <input type="text" name="aadhar" value={formData.aadhar} onChange={handleChange} required maxLength="12" pattern="[0-9]{12}" />
+              <input type="tel" name="phone" value={formData.phone} onChange={handleChange} requiredminLength="10" maxLength="10" pattern="[0-9]{10}" title="Phone number must be exactly 10 digits" />
+              <label>Aadhar:</label>
+              <input type="text" name="aadhar" value={formData.aadhar} onChange={handleChange} required pattern="[0-9]{12}" maxLength="12" title="Aadhar must be exactly 12 digits" />
 
               <label>Check-in Date:</label>
-              <input type="date" name="checkin_date" value={formData.checkin_date} onChange={handleChange} required />
-
+              <input
+                type="date"
+                name="checkin_date"
+                value={formData.checkin_date}
+                onChange={handleChange}
+                required
+                min={new Date().toISOString().split("T")[0]}
+              />
               <label>Check-in Time:</label>
               <input type="time" name="checkin_time" value={formData.checkin_time} onChange={handleChange} required />
 
               <label>Check-out Date:</label>
-              <input type="date" name="checkout_date" value={formData.checkout_date} onChange={handleChange} required />
+              <input
+                type="date"
+                name="checkout_date"
+                value={formData.checkout_date}
+                onChange={handleChange}
+                required
+                min={formData.checkin_date || new Date().toISOString().split("T")[0]}
+              />
 
-              <label>Guests:</label>
-              <input type="number" name="guests" value={formData.guests} min="1" onChange={handleChange} required />
+              <label>
+                {formData.room_type === "Hall" ? "Number of Guests:" : "Number of Rooms:"}
+              </label>
+              <input
+                type="number"
+                name="guests"
+                value={formData.guests}
+                min="1"
+                onChange={handleChange}
+                required
+              />
 
               <label>Room Type:</label>
               <input type="text" value={formData.room_type} readOnly />
@@ -212,21 +283,20 @@ const AllRooms = () => {
         </div>
       )}
 
-
       {showTransactionForm && (
         <div className="transaction-form-container">
           <div className="transaction-form">
             <h2 className="transaction-title">Transaction Details</h2>
             <div className="qr-payment-section">
-        <h4>Scan QR to Pay</h4>
-        <img src="/qr-code.png" alt="QR Code for Payment" className="qr-image" />
-        <div className="bank-details">
-          <p><strong>Bank Name:</strong> State Bank of India</p>
-          <p><strong>Account Name:</strong> SGSITS Guest House</p>
-          <p><strong>Account No:</strong> 1234567890</p>
-          <p><strong>IFSC Code:</strong> SBIN0001234</p>
-        </div>
-      </div>
+              <h4>Scan QR to Pay</h4>
+              <img src="/qr-code.jpg" alt="QR Code for Payment" className="qr-image" />
+              <div className="bank-details">
+                <p><strong>Bank Name:</strong> State Bank of India</p>
+                <p><strong>Account Name:</strong> SGSITS Guest House</p>
+                <p><strong>Account No:</strong> 1234567890</p>
+                <p><strong>IFSC Code:</strong> SBIN0001234</p>
+              </div>
+            </div>
             <form onSubmit={handleTransactionSubmit}>
               <label>Transaction ID:</label>
               <input type="text" name="transaction_id" value={transactionData.transaction_id} onChange={handleTransactionChange} required />
@@ -238,7 +308,7 @@ const AllRooms = () => {
               <input type="number" name="amount" value={transactionData.amount} onChange={handleTransactionChange} required />
 
               <button type="submit" className="book-btn">Submit Transaction</button>
-        <button type="button" className="close-btn" onClick={() => setShowTransactionForm(false)}>Cancel</button>
+              <button type="button" className="close-btn" onClick={() => setShowTransactionForm(false)}>Cancel</button>
             </form>
           </div>
         </div>

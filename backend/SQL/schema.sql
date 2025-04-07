@@ -44,3 +44,14 @@ VALUES ('Admin', 'admin@gmail.com', '$2y$10$sWEbpUs4M4v7Wl2Xyx1OFeL/nLG7B6/LxdEf
          created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
          FOREIGN KEY (booking_id) REFERENCES bookings(id) ON DELETE CASCADE
      );
+
+-- availability table
+    CREATE TABLE availability (
+     type ENUM('single', 'double', 'hall') PRIMARY KEY,
+      total INT NOT NULL,
+      occupied INT NOT NULL
+     );
+    INSERT INTO availability (type, total, occupied) VALUES
+    ('single', 8, 8),
+    ('double', 8, 2),
+    ('hall', 15, 3);

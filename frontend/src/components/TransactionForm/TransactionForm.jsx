@@ -107,7 +107,7 @@ const TransactionForm = ({ bookingId, onClose, onSuccess }) => {
         </h2>
         <div className="qr-payment-section">
   <h4>Scan QR to Pay</h4>
-  <img src="/qr-code.png" alt="QR Code for Payment" className="qr-image" />
+  <img src="/qr-code.jpg" alt="QR Code for Payment" className="qr-image" />
   <div className="bank-details">
     <p><strong>Bank Name:</strong> State Bank of India</p>
     <p><strong>Account Name:</strong> SGSITS Guest House</p>

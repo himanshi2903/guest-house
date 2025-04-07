@@ -87,7 +87,7 @@ const UserDashboard = () => {
               <th>Check-in Date</th>
               <th>Check-in Time</th>
               <th>Check-out Date</th>
-              <th>Guests</th>
+              <th>No. of Rooms / Guests</th>
               <th>Transaction Status</th>
               <th>Status</th>
             </tr>

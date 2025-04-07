@@ -7,6 +7,8 @@ const authRoutes = require("./routes/authRoutes");
 const bookingRoutes = require("./routes/bookingRoutes");
 const adminRoutes = require("./routes/adminRoutes");
 const transactionRoutes = require("./routes/transactions"); // ✅ NEW
+const availabilityRoutes = require("./routes/availabilityRoutes");
+
 
 const authMiddleware = require("./middleware/authMiddleware");
 
@@ -25,6 +27,7 @@ app.use("/auth", authRoutes);
 app.use("/bookings", authMiddleware.verifyToken, bookingRoutes);
 app.use("/transactions", authMiddleware.verifyToken, transactionRoutes); // ✅ Plugged in
 app.use("/admin", authMiddleware.verifyToken, adminRoutes);
+app.use("/admin/availability", availabilityRoutes);
 
 // Default Route
 app.get("/", (req, res) => {

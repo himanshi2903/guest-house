@@ -91,8 +91,70 @@ const deleteUser = async (req, res) => {
   }
 };
 
+// 🔄 Get All Availability
+const getAvailability = (req, res) => {
+  db.query("SELECT * FROM availability", (err, results) => {
+    if (err) return res.status(500).json({ error: "Failed to fetch availability" });
+
+    const formatted = {
+      single_total: 0,
+      single_occupied: 0,
+      double_total: 0,
+      double_occupied: 0,
+      hall_total: 0,
+      hall_occupied: 0,
+    };
+
+    results.forEach((row) => {
+      if (row.type === "single") {
+        formatted.single_total = row.total;
+        formatted.single_occupied = row.occupied;
+      } else if (row.type === "double") {
+        formatted.double_total = row.total;
+        formatted.double_occupied = row.occupied;
+      } else if (row.type === "hall") {
+        formatted.hall_total = row.total;
+        formatted.hall_occupied = row.occupied;
+      }
+    });
+
+    res.json(formatted);
+  });
+};
+
+// ✏️ Update Availability (Admin input)
 
 
-module.exports = { getDashboardStats, getAllBookings, updateBookingStatus, getAllUsers, updateUser, deleteUser, };
+const updateAvailability = (req, res) => {
+  const updates = req.body; // Array of { type, total, occupied }
+
+  if (!Array.isArray(updates)) {
+    return res.status(400).json({ error: "Invalid request format. Expected an array." });
+  }
+
+  let completed = 0;
+  let hasError = false;
+
+  updates.forEach((entry) => {
+    const { type, total, occupied } = entry;
+    db.query(
+      "UPDATE availability SET total = ?, occupied = ? WHERE type = ?",
+      [total, occupied, type],
+      (err) => {
+        if (err && !hasError) {
+          hasError = true;
+          return res.status(500).json({ error: "Failed to update availability" });
+        }
+
+        completed++;
+        if (completed === updates.length && !hasError) {
+          res.json({ message: "All availability updated successfully" });
+        }
+      }
+    );
+  });
+};
+
+module.exports = { getDashboardStats, getAllBookings, updateBookingStatus, getAllUsers, updateUser, deleteUser, getAvailability, updateAvailability, };
 
 
