@@ -91,7 +91,6 @@ const deleteUser = async (req, res) => {
   }
 };
 
-// 🔄 Get All Availability
 const getAvailability = (req, res) => {
   db.query("SELECT * FROM availability", (err, results) => {
     if (err) return res.status(500).json({ error: "Failed to fetch availability" });
@@ -122,11 +121,10 @@ const getAvailability = (req, res) => {
   });
 };
 
-// ✏️ Update Availability (Admin input)
 
 
 const updateAvailability = (req, res) => {
-  const updates = req.body; // Array of { type, total, occupied }
+  const updates = req.body; 
 
   if (!Array.isArray(updates)) {
     return res.status(400).json({ error: "Invalid request format. Expected an array." });

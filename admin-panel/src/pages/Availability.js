@@ -4,7 +4,7 @@ import Navbar from "../components/Navbar";
 import axios from "axios";
 
 const Availability = () => {
-  const [availability, setAvailability] = useState(null); // Initially null
+  const [availability, setAvailability] = useState(null); 
 
   useEffect(() => {
     loadAvailability();
@@ -17,7 +17,7 @@ const Availability = () => {
         headers: { Authorization: `Bearer ${token}` },
       });
   
-      // ✅ Directly set data if it's already an object
+     
       if (res.data && typeof res.data === "object") {
         setAvailability(res.data);
       } else {

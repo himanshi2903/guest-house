@@ -42,7 +42,7 @@ const AllRooms = () => {
           },
         });
 
-        console.log("📥 Raw Availability Response:", res.data); // 🧪 Debug here
+        console.log("📥 Raw Availability Response:", res.data); 
 
         const data = res.data;
 

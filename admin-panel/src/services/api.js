@@ -84,9 +84,7 @@ export const deleteUser = async (id) => {
   }
 };
 
-// ✅ Add these functions to your existing `api.js`
 
-// Fetch availability data
 export const fetchAvailability = async () => {
   try {
     const response = await api.get("/admin/availability", {
@@ -99,7 +97,6 @@ export const fetchAvailability = async () => {
   }
 };
 
-// Update availability (admin only)
 export const updateAvailability = async (data) => {
   try {
     const response = await api.put("/admin/availability", data, {

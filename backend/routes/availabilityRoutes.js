@@ -6,7 +6,7 @@ const {
 } = require("../controllers/adminController");
 const { verifyToken } = require("../middleware/authMiddleware");
 
-router.get("/", verifyToken, getAvailability); // protect if admin-only
-router.post("/", verifyToken, updateAvailability); // ← Change to POST to match frontend
+router.get("/", verifyToken, getAvailability); 
+router.post("/", verifyToken, updateAvailability); 
 
 module.exports = router;
