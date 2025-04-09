@@ -1,10 +1,12 @@
 import React from "react";
 import { useNavigate } from "react-router-dom"; 
+// import { Typewriter } from "react-simple-typewriter";
 import Header from "../Header/Header";
 import Button from "../Button/Button";
 import Slideshow from "../Slideshow/Slideshow";
 import Footer from "../Footer/Footer";
 import "./Home.css";
+
 
 const Home = () => {
   const navigate = useNavigate(); 
@@ -31,16 +33,20 @@ const Home = () => {
       <div className="image-container">
         <img src="out3.png" alt="gsits" />
         <div className="overlay-content">
-          <h3>
+          <h3 className="welcome-text">
+          {/* <Typewriter words={[welcome-text]} loop={false} cursor cursorStyle="|" typeSpeed={100} deleteSpeed={50} /> */}
             Welcome to, <br />
-            <span>Narmada Guest House</span>
+            <span>
+              Narmada
+              <br/> 
+              Guest House</span>
           </h3>
-          <Button text="View Rooms"onClick={() => navigate("/allrooms")} />
+          <Button text="View Rooms" onClick={() => navigate("/allrooms")} />
         </div>
       </div>
 
       <div className="slideshow">
-        <h3>WHAT WE HAVE TO OFFER</h3>
+        <h3>WHAT WE HAVE TO OFFER...</h3>
         <Slideshow images={images} />
       </div>
 

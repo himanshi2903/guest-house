@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from "react";
-import { FaBars, FaFilter,  FaUserCircle } from "react-icons/fa";
+import { FaBars, FaUserCircle } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 import Button from "../Button/Button";
 import "./Header.css";
@@ -117,16 +117,7 @@ const Header = () => {
             value={searchQuery}
             onChange={handleSearch}
           />
-          <FaFilter className="filter-icon icon" />
-          {searchResults.length > 0 && (
-            <div className="search-results">
-              {searchResults.map((item, index) => (
-                <p key={index} onClick={() => handleSearchClick(item.path)}>
-                  {item.name}
-                </p>
-              ))}
-            </div>
-          )}
+          
         </div>
 
         <div className="right">

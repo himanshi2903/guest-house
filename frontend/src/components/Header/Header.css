@@ -1,12 +1,9 @@
-/* Header */
-header {
-  padding: 0;
-  margin: 0;
-  width: 100%;
-}
-
 /* Top Blue Header */
 .blue-header {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 999;
   background-color: #0c2d6b;
   color: #fdb927;
   font-weight: bold;
@@ -21,11 +18,16 @@ header {
 
 /* Main Header */
 .main-header {
+  position: fixed;
+  top: 100px;
+  width: 100%;
+  z-index: 999;
   background-color: #d1d1d1;
   display: flex;
   align-items: center;
   justify-content: space-between;
   padding: 10px;
+  
 }
 
 /* Sections */
@@ -35,6 +37,14 @@ header {
   align-items: center;
   font-size: 1.5rem;
   font-weight: bold;
+}
+
+.right{
+  padding-right: 15px;
+}
+
+.left{
+  padding-left: 15px;
 }
 
 /* Input */
@@ -55,7 +65,7 @@ header {
 /* Dropdown Menus */
 .dropdown-menu, .dropdown-menu-user {
   position: absolute;
-  top: 10rem;
+  top: 3rem;
   background-color: #d1d1d1;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   border-radius: 5px;
