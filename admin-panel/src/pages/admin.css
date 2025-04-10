@@ -141,6 +141,7 @@
   width: 380px; 
   max-width: 100%;
   margin-top: 3rem;
+  margin: 8rem;
   }
   
 .login-box form{
@@ -165,6 +166,41 @@
 
 .login-box button:hover {
     background: #540b15;
+}
+
+form {
+  background: white;
+  padding: 20px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  width: 300px;
+}
+
+form input {
+  width: 100%;
+  padding: 8px;
+  margin: 8px 0;
+  border: 1px solid #ccc;
+  border-radius: 3px;
+}
+
+form button {
+  width: 100%;
+  padding: 8px;
+  background: #333;
+  color: white;
+  border: none;
+  cursor: pointer;
+}
+
+form button:hover {
+  background: #555;
+}
+
+.error {
+  color: red;
+  font-size: 14px;
+  margin-bottom: 10px;
 }
 
 .admin-container {
