@@ -1,4 +1,4 @@
-
+/* 
 .login-container {
   display: flex;
   flex-direction: column;
@@ -129,7 +129,7 @@ th {
   color: white;
 }
 
-/* Bookings.css */
+
 .bookings-container {
   padding: 20px;
   background-color: #f4f4f4;
@@ -216,7 +216,7 @@ th {
 .reject:hover {
   background-color: #c82333;
 }
-/* Users.css */
+
 .users-container {
   padding: 20px;
   background-color: #f4f4f4;
@@ -272,8 +272,8 @@ th {
 }
 
 .logout-btn {
-  background-color: #d9534f; /* Red color for logout */
-  color: white; /* White text */
+  background-color: #d9534f; 
+  color: white;
   border: none;
   padding: 10px 20px;
   font-size: 16px;
@@ -286,9 +286,9 @@ th {
 }
 
 .logout-btn:hover {
-  background-color: #c9302c; /* Darker red on hover */
+  background-color: #c9302c;
 }
 
 .logout-btn:active {
-  background-color: #ac2925; /* Even darker when clicked */
-}
+  background-color: #ac2925; 
+} */

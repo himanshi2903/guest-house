@@ -1,6 +1,10 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
+import "./admin.css"
+import "../components/Footer"
+import Footer from "../components/Footer";
+import Header from "../components/Header";
 
 const Login = () => {
   const [email, setEmail] = useState("");
@@ -31,7 +35,10 @@ const Login = () => {
   };
 
   return (
-    <div className="login-container">
+    <div className="container">
+      <div className="login-container">
+      <Header/>
+      <div className="login-box">
       <h2>Admin Login</h2>
       {error && <p className="error">{error}</p>}
       <form onSubmit={handleLogin}>
@@ -39,7 +46,12 @@ const Login = () => {
         <input type="password" placeholder="Password" value={password} onChange={(e) => setPassword(e.target.value)} required />
         <button type="submit">Login</button>
       </form>
+      </div>
+      
     </div>
+    <Footer/>
+    </div>
+    
   );
 };
 

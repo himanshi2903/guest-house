@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import Sidebar from "../components/Sidebar";
 import Navbar from "../components/Navbar";
 import { fetchDashboardStats } from "../services/api"; 
+import "./admin.css";
 
 const Dashboard = () => {
   const [stats, setStats] = useState({
@@ -27,7 +28,7 @@ const Dashboard = () => {
 
   return (
     <div className="admin-container">
-      <Sidebar />
+      <Sidebar className="sidebar"/>
       <div className="main-content">
         <Navbar />
         <h1>Welcome to Admin Dashboard</h1>

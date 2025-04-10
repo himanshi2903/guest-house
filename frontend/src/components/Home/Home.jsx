@@ -1,15 +1,14 @@
 import React from "react";
-import { useNavigate } from "react-router-dom"; 
-// import { Typewriter } from "react-simple-typewriter";
+import { useNavigate } from "react-router-dom";
+import { Typewriter } from "react-simple-typewriter";
 import Header from "../Header/Header";
 import Button from "../Button/Button";
 import Slideshow from "../Slideshow/Slideshow";
 import Footer from "../Footer/Footer";
 import "./Home.css";
 
-
 const Home = () => {
-  const navigate = useNavigate(); 
+  const navigate = useNavigate();
 
   const images = [
     { src: "AC-Room.png", text: "AC & Non-AC Rooms" },
@@ -33,14 +32,18 @@ const Home = () => {
       <div className="image-container">
         <img src="out3.png" alt="gsits" />
         <div className="overlay-content">
-          <h3 className="welcome-text">
-          {/* <Typewriter words={[welcome-text]} loop={false} cursor cursorStyle="|" typeSpeed={100} deleteSpeed={50} /> */}
-            Welcome to, <br />
-            <span>
-              Narmada
-              <br/> 
-              Guest House</span>
-          </h3>
+          <div className="welcome-text">
+          <Typewriter
+            words={["Welcome to, Narmada Guest House"]}
+            loop={false}
+            cursor
+            cursorStyle="|"
+            typeSpeed={100}
+            deleteSpeed={50}
+          />
+          </div>
+          
+          <br/>
           <Button text="View Rooms" onClick={() => navigate("/allrooms")} />
         </div>
       </div>
@@ -53,11 +56,16 @@ const Home = () => {
       <div className="brief">
         <h3>THE GUEST HOUSE</h3>
         <p>
-        Narmada Guest House at SGSITS Indore provides a warm, comfortable, and convenient stay for visitors, faculty, and guests.
-         Strategically located in the heart of Indore, near the railway station, the guest house is nestled within the lush, green,
-          and well-maintained campus of SGSITS. Our well-equipped rooms, modern amenities, and serene surroundings create a peaceful
-           environment, ensuring a pleasant and relaxing experience. Whether you're visiting for academic engagements, professional work,
-            or a short stay, our hospitality ensures a home-like comfort with exceptional cleanliness and a welcoming atmosphere.
+          Narmada Guest House at SGSITS Indore provides a warm, comfortable, and
+          convenient stay for visitors, faculty, and guests. Strategically
+          located in the heart of Indore, near the railway station, the guest
+          house is nestled within the lush, green, and well-maintained campus of
+          SGSITS. Our well-equipped rooms, modern amenities, and serene
+          surroundings create a peaceful environment, ensuring a pleasant and
+          relaxing experience. Whether you're visiting for academic engagements,
+          professional work, or a short stay, our hospitality ensures a
+          home-like comfort with exceptional cleanliness and a welcoming
+          atmosphere.
         </p>
       </div>
 
@@ -127,7 +135,7 @@ const Home = () => {
           </div>
           <div className="team-member">
             <div className="team-photo">
-              <img src="caretaker.png" alt={img.title}/>
+              <img src="caretaker.png" alt={img.title} />
             </div>
             <p>
               <strong>Prakash Pal</strong>

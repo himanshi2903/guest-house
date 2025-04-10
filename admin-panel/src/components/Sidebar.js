@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import "../pages/admin.css"
 
 const Sidebar = () => {
   return (

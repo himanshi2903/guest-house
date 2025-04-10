@@ -20,9 +20,9 @@ Header {
     filter: brightness(0.4);
 }
 
-.overlay-content .welcome-text span{
+/* .overlay-content .welcome-text span{
   font-size: 8rem;
-}
+} */
 
 .overlay-content {
     position: absolute;
@@ -34,16 +34,16 @@ Header {
 
   }
 
-  .overlay-content h3 {
+  /* .overlay-content h3 {
     font-size: 28px;
     font-weight: bold;
     margin-bottom: 20px;
     font-size: 2rem;
-  }
+  } */
 
-  .overlay-content h3 span{
+  /* .overlay-content h3 span{
     font-size: 5rem;
-  }
+  } */
 
   .slideshow {
     padding: 3rem;
@@ -250,4 +250,8 @@ Header {
     font-size: 1.75rem;
     color: #222;
   }
-  
+
+  .overlay-content .welcome-text{
+    font-size: 5rem;
+    font-weight: 700;
+  }
