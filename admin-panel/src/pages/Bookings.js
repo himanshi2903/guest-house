@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
 import Sidebar from "../components/Sidebar";
 import Navbar from "../components/Navbar";
+import Header from "../components/Header";
+import Footer from "../components/Footer";
 import { fetchAllBookings, updateBookingStatus } from "../services/api";
 
 const Bookings = () => {
@@ -33,7 +35,9 @@ const Bookings = () => {
   };
 
   return (
-    <div className="admin-container">
+    <div>
+      <Header/>
+<div className="admin-container">
       <Sidebar />
       <div className="main-content">
         <Navbar />
@@ -102,6 +106,9 @@ const Bookings = () => {
         </div>
       </div>
     </div>
+    <Footer/>
+    </div>
+    
   );
 };
 

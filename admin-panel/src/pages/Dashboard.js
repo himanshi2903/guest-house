@@ -2,6 +2,8 @@ import { useEffect, useState } from "react";
 import Sidebar from "../components/Sidebar";
 import Navbar from "../components/Navbar";
 import { fetchDashboardStats } from "../services/api"; 
+import Header from "../components/Header";
+import Footer from "../components/Footer";
 import "./admin.css";
 
 const Dashboard = () => {
@@ -27,7 +29,10 @@ const Dashboard = () => {
   }, []);
 
   return (
+    <div>
+      <Header />
     <div className="admin-container">
+      
       <Sidebar className="sidebar"/>
       <div className="main-content">
         <Navbar />
@@ -38,7 +43,11 @@ const Dashboard = () => {
           <div className="card">Users Registered: {stats.totalUsers}</div>
         </div>
       </div>
+      
     </div>
+    <Footer />
+    </div>
+    
   );
 };
 
