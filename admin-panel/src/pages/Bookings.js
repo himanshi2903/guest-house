@@ -49,7 +49,7 @@ const Bookings = () => {
                 <th>ID</th>
                 <th>User</th>
                 <th>Room Type</th>
-                <th>Guests</th>
+                <th>Rooms</th>
                 <th>Beds</th>
                 <th>Check-in</th>
                 <th>Check-out</th>

@@ -20,7 +20,7 @@ const Contact = () => {
     <p><strong>Account Name:</strong> SGSITS Guest House</p>
     <p><strong>Account No:</strong> 1234567890</p>
     <p><strong>IFSC Code:</strong> SBIN0001234</p>
-    <img src="/qr-code.png" alt="QR Code for Payment" className="qr-image" />
+    <img src="/qr-code.jpg" alt="QR Code for Payment" className="qr-image" />
   </div>
           </div>
           <div className="contact-info">

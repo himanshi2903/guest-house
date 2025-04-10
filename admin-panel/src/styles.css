@@ -290,5 +290,80 @@ th {
 }
 
 .logout-btn:active {
-  background-color: #ac2925; 
-} */
+  background-color: #ac2925; /* Even darker when clicked */
+}
+
+.availability-form {
+  padding: 20px;
+  background-color: #ffffff;
+  border-radius: 8px;
+  max-width: 800px;
+  margin: 20px auto;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.availability-section {
+  margin-bottom: 30px;
+  padding: 15px;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  background-color: #f9f9f9;
+}
+
+.availability-section h3 {
+  margin-top: 0;
+  margin-bottom: 15px;
+  font-size: 20px;
+  color: #333;
+}
+
+.availability-section label {
+  display: block;
+  font-weight: 500;
+  margin-bottom: 5px;
+  margin-top: 10px;
+  color: #555;
+}
+
+.availability-section input[type="number"] {
+  width: 100%;
+  padding: 8px 10px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.availability-section p {
+  margin-top: 12px;
+  font-size: 16px;
+  color: #222;
+}
+
+.save-btn {
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  font-size: 16px;
+  padding: 10px 20px;
+  margin-top: 10px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.save-btn:hover {
+  background-color: #0056b3;
+}
+
+@media screen and (max-width: 600px) {
+  .availability-section {
+    padding: 10px;
+  }
+
+  .availability-section input {
+    font-size: 14px;
+  }
+
+  .save-btn {
+    width: 100%;
+  }
+}
